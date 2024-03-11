@@ -1,16 +1,24 @@
-﻿﻿'OwenFujii
-'RCET 2265
-'Spring 2024
-'Roll of the Dice
-'https://github.com/Masaharu41/RollTheDice.git
+﻿'﻿'OwenFujii
+''RCET 2265
+''Spring 2024
+''Roll of the Dice
+''https://github.com/Masaharu41/RollTheDiceListBox.git
 
-Option Explicit On
-Option Strict On
+''Option Explicit On
+''Option Strict On
 
 
 Public Class RollTheDiceListBox
+    Private Sub RollTheDice(sender As Object, e As EventArgs) Handles RollButton.Click
+        Roll()
+    End Sub
 
-    Sub Main()
+    Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
+        Me.Close()
+    End Sub
+
+
+    Sub Roll()
 
         Dim rollTracker() As Integer
         Dim display() = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}
@@ -18,6 +26,7 @@ Public Class RollTheDiceListBox
         Dim twoRolled%, threeRolled%, fourRolled%, fiveRolled%
         Dim sixRolled%, sevenRolled%, eightRolled%, nineRolled%
         Dim tenRolled%, elevenRolled%, twelveRolled%
+        Dim accumulateMessage As String
         'A for loop which rolls the dice 1000 times and tracks how often each number is rolled
         For i = 1 To 1000
             diceRolled = RollDice()
@@ -60,17 +69,30 @@ Public Class RollTheDiceListBox
         rollTracker = {twoRolled, threeRolled, fourRolled, fiveRolled, sixRolled, sevenRolled, eightRolled, nineRolled,
                 tenRolled, elevenRolled, twelveRolled}
         'Display the results of the 1000 rolls of the dice
-        Console.WriteLine("Roll of The Dice".PadLeft(36))
-        Console.WriteLine(StrDup(55, "-"))
+        'DisplayListBox.Text = ("Roll of The Dice".PadLeft(36) & vbNewLine & StrDup(55, "-"))
+
+        'For i = 0 To UBound(display)
+        '    DisplayListBox.Text = (CStr(display(i)).PadLeft(4) & "|")
+        'Next
+        'DisplayListBox.Text = (vbNewLine & StrDup(55, "-"))
+        ''Console.WriteLine(StrDup(55, "-"))
+        'For i = 0 To UBound(rollTracker)
+        '    DisplayListBox.Text = (CStr(rollTracker(i)).PadLeft(4) & "|")
+        'Next
+
+        accumulateMessage = ("Roll of The Dice".PadLeft(36) & vbNewLine & StrDup(55, "-"))
+
         For i = 0 To UBound(display)
-            Console.Write(CStr(display(i)).PadLeft(4) & "|")
+            accumulateMessage = (CStr(display(i)).PadLeft(4) & "|")
         Next
-        Console.WriteLine()
-        Console.WriteLine(StrDup(55, "-"))
+        accumulateMessage = (vbNewLine & StrDup(55, "-"))
+        'Console.WriteLine(StrDup(55, "-"))
         For i = 0 To UBound(rollTracker)
-            Console.Write(CStr(rollTracker(i)).PadLeft(4) & "|")
+            accumulateMessage = (CStr(rollTracker(i)).PadLeft(4) & "|")
         Next
-        Console.Read()
+
+        DisplayListBox.Text = accumulateMessage
+        'Console.Read()
     End Sub
 
 
@@ -85,5 +107,6 @@ Public Class RollTheDiceListBox
         diceRolled = diceRoll1 + diceRoll2
         Return diceRolled
     End Function
+
 
 End Class

@@ -28,6 +28,7 @@ Public Class RollTheDiceListBox
         Dim twoRolled%, threeRolled%, fourRolled%, fiveRolled%
         Dim sixRolled%, sevenRolled%, eightRolled%, nineRolled%
         Dim tenRolled%, elevenRolled%, twelveRolled%
+        Dim tempMessage As String
         Dim accumulateMessage As String
         Static lastMessage As String
         'A for loop which rolls the dice 1000 times and tracks how often each number is rolled
@@ -71,25 +72,29 @@ Public Class RollTheDiceListBox
 
         rollTracker = {twoRolled, threeRolled, fourRolled, fiveRolled, sixRolled, sevenRolled, eightRolled, nineRolled,
                 tenRolled, elevenRolled, twelveRolled}
-
+        'Code below both displays the information to the display box while also
+        'Tracking the data as a normal string. this string is returned as a function
+        'This string can then be used to write the data to a file.
         DisplayListBox.Items.Add("Roll of The Dice".PadLeft(36))
         DisplayListBox.Items.Add(StrDup(55, "-"))
+        accumulateMessage = ("Roll of The Dice".PadLeft(36) & vbNewLine & StrDup(55, "-") & vbNewLine)
         For i = 0 To UBound(display)
         lastMessage = (CStr(display(i)).PadLeft(4) & "|")
+            tempMessage = tempMessage & lastMessage
             accumulateMessage = accumulateMessage & lastMessage
-            'DisplayListBox.Items.Add(lastMessage)
         Next
-        DisplayListBox.Items.Add(accumulateMessage)
+        DisplayListBox.Items.Add(tempMessage)
         lastMessage = (vbNewLine & StrDup(55, "-") & vbNewLine)
-        'accumulateMessage = accumulateMessage & lastMessage
+        accumulateMessage = accumulateMessage & lastMessage
         DisplayListBox.Items.Add(lastMessage)
-        accumulateMessage = ""
+        tempMessage = ""
         For i = 0 To UBound(rollTracker)
             lastMessage = (CStr(rollTracker(i)).PadLeft(4) & "|")
+            tempMessage = tempMessage & lastMessage
             accumulateMessage = accumulateMessage & lastMessage
-            '  DisplayListBox.Items.Add(lastMessage)
         Next
-        DisplayListBox.Items.Add(accumulateMessage)
+        DisplayListBox.Items.Add(tempMessage)
+
         Return accumulateMessage
     End Function
 

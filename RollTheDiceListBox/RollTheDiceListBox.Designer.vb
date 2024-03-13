@@ -25,6 +25,7 @@ Partial Class RollTheDiceListBox
         Me.DisplayListBox = New System.Windows.Forms.ListBox()
         Me.RollButton = New System.Windows.Forms.Button()
         Me.ExitButton = New System.Windows.Forms.Button()
+        Me.WriteCheckBox = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'DisplayListBox
@@ -55,21 +56,34 @@ Partial Class RollTheDiceListBox
         Me.ExitButton.Text = "E&xit"
         Me.ExitButton.UseVisualStyleBackColor = True
         '
+        'WriteCheckBox
+        '
+        Me.WriteCheckBox.AutoSize = True
+        Me.WriteCheckBox.Location = New System.Drawing.Point(483, 248)
+        Me.WriteCheckBox.Name = "WriteCheckBox"
+        Me.WriteCheckBox.Size = New System.Drawing.Size(166, 29)
+        Me.WriteCheckBox.TabIndex = 4
+        Me.WriteCheckBox.Text = "Write To File"
+        Me.WriteCheckBox.UseVisualStyleBackColor = True
+        '
         'RollTheDiceListBox
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.WriteCheckBox)
         Me.Controls.Add(Me.ExitButton)
         Me.Controls.Add(Me.RollButton)
         Me.Controls.Add(Me.DisplayListBox)
         Me.Name = "RollTheDiceListBox"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents DisplayListBox As ListBox
     Friend WithEvents RollButton As Button
     Friend WithEvents ExitButton As Button
+    Friend WithEvents WriteCheckBox As CheckBox
 End Class

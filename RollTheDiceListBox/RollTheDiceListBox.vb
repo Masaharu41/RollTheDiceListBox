@@ -8,11 +8,20 @@
 ''Option Strict On
 
 
+Imports System.IO
+
 Public Class RollTheDiceListBox
     Private Sub RollTheDice(sender As Object, e As EventArgs) Handles RollButton.Click
-        '  DisplayListBox.Items.Add(Roll())
-        Roll()
+        Static currentRoll As String
+        DisplayListBox.Items.Clear()
+        currentRoll = Roll()
+        If WriteCheckBox.Checked = True Then
+            FileOpen(1, "RollTheDice.txt", OpenMode.Append)
+            Write(1, vbNewLine & TimeString & "  " & DateString & vbNewLine & currentRoll & vbNewLine)
+            FileClose(1)
+        Else
 
+        End If
     End Sub
 
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click

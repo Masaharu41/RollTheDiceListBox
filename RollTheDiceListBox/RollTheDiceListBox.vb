@@ -10,7 +10,9 @@
 
 Public Class RollTheDiceListBox
     Private Sub RollTheDice(sender As Object, e As EventArgs) Handles RollButton.Click
+        '  DisplayListBox.Items.Add(Roll())
         Roll()
+
     End Sub
 
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
@@ -18,7 +20,7 @@ Public Class RollTheDiceListBox
     End Sub
 
 
-    Sub Roll()
+    Function Roll() As String
 
         Dim rollTracker() As Integer
         Dim display() = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}
@@ -27,6 +29,7 @@ Public Class RollTheDiceListBox
         Dim sixRolled%, sevenRolled%, eightRolled%, nineRolled%
         Dim tenRolled%, elevenRolled%, twelveRolled%
         Dim accumulateMessage As String
+        Static lastMessage As String
         'A for loop which rolls the dice 1000 times and tracks how often each number is rolled
         For i = 1 To 1000
             diceRolled = RollDice()
@@ -68,32 +71,27 @@ Public Class RollTheDiceListBox
 
         rollTracker = {twoRolled, threeRolled, fourRolled, fiveRolled, sixRolled, sevenRolled, eightRolled, nineRolled,
                 tenRolled, elevenRolled, twelveRolled}
-        'Display the results of the 1000 rolls of the dice
-        'DisplayListBox.Text = ("Roll of The Dice".PadLeft(36) & vbNewLine & StrDup(55, "-"))
 
-        'For i = 0 To UBound(display)
-        '    DisplayListBox.Text = (CStr(display(i)).PadLeft(4) & "|")
-        'Next
-        'DisplayListBox.Text = (vbNewLine & StrDup(55, "-"))
-        ''Console.WriteLine(StrDup(55, "-"))
-        'For i = 0 To UBound(rollTracker)
-        '    DisplayListBox.Text = (CStr(rollTracker(i)).PadLeft(4) & "|")
-        'Next
-
-        accumulateMessage = ("Roll of The Dice".PadLeft(36) & vbNewLine & StrDup(55, "-"))
-
+        DisplayListBox.Items.Add("Roll of The Dice".PadLeft(36))
+        DisplayListBox.Items.Add(StrDup(55, "-"))
         For i = 0 To UBound(display)
-            accumulateMessage = (CStr(display(i)).PadLeft(4) & "|")
+        lastMessage = (CStr(display(i)).PadLeft(4) & "|")
+            accumulateMessage = accumulateMessage & lastMessage
+            'DisplayListBox.Items.Add(lastMessage)
         Next
-        accumulateMessage = (vbNewLine & StrDup(55, "-"))
-        'Console.WriteLine(StrDup(55, "-"))
+        DisplayListBox.Items.Add(accumulateMessage)
+        lastMessage = (vbNewLine & StrDup(55, "-") & vbNewLine)
+        'accumulateMessage = accumulateMessage & lastMessage
+        DisplayListBox.Items.Add(lastMessage)
+        accumulateMessage = ""
         For i = 0 To UBound(rollTracker)
-            accumulateMessage = (CStr(rollTracker(i)).PadLeft(4) & "|")
+            lastMessage = (CStr(rollTracker(i)).PadLeft(4) & "|")
+            accumulateMessage = accumulateMessage & lastMessage
+            '  DisplayListBox.Items.Add(lastMessage)
         Next
-
-        DisplayListBox.Text = accumulateMessage
-        'Console.Read()
-    End Sub
+        DisplayListBox.Items.Add(accumulateMessage)
+        Return accumulateMessage
+    End Function
 
 
     Function RollDice() As Integer

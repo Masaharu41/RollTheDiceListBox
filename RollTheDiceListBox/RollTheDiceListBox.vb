@@ -1,14 +1,11 @@
-﻿'﻿'OwenFujii
+﻿'﻿'Owen Fujii
 ''RCET 2265
 ''Spring 2024
 ''Roll of the Dice
 ''https://github.com/Masaharu41/RollTheDiceListBox.git
 
-''Option Explicit On
-''Option Strict On
-
-
-Imports System.IO
+Option Explicit On
+Option Strict On
 
 Public Class RollTheDiceListBox
     Private Sub RollTheDice(sender As Object, e As EventArgs) Handles RollButton.Click
@@ -17,7 +14,7 @@ Public Class RollTheDiceListBox
         currentRoll = Roll()
         If WriteCheckBox.Checked = True Then
             FileOpen(1, "RollTheDice.txt", OpenMode.Append)
-            Write(1, vbNewLine & TimeString & "  " & DateString & vbNewLine & currentRoll & vbNewLine)
+            Write(1, {vbNewLine & TimeString & "  " & DateString & vbNewLine & currentRoll & vbNewLine})
             FileClose(1)
         Else
 
@@ -88,7 +85,7 @@ Public Class RollTheDiceListBox
         DisplayListBox.Items.Add(StrDup(55, "-"))
         accumulateMessage = ("Roll of The Dice".PadLeft(36) & vbNewLine & StrDup(55, "-") & vbNewLine)
         For i = 0 To UBound(display)
-        lastMessage = (CStr(display(i)).PadLeft(4) & "|")
+            lastMessage = (CStr(display(i)).PadLeft(4) & "|")
             tempMessage = tempMessage & lastMessage
             accumulateMessage = accumulateMessage & lastMessage
         Next
